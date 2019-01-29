@@ -2,7 +2,8 @@ import {
   ADD_TODO,
   TOGGLE_COMPLETED,
   CLEAR_COMPLETED,
-  TOGGLE_MODAL
+  TOGGLE_MODAL,
+  DELETE_ONE
 } from "../types/index";
 
 const initialState = {
@@ -40,6 +41,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isModalOpen: !state.isModalOpen
+      };
+
+    case DELETE_ONE:
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== action.payload)
       };
 
     default:

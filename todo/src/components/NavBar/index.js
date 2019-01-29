@@ -8,13 +8,20 @@ import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import ClearIcon from "@material-ui/icons/Clear";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { toggleModal, toggleTodo, clearCompleted } from "../../store/actions";
+import {
+  toggleModal,
+  toggleTodo,
+  clearCompleted,
+  deleteOne
+} from "../../store/actions";
 const styles = theme => ({
   text: {
     paddingTop: theme.spacing.unit * 2,
@@ -62,6 +69,10 @@ function BottomAppBar(props) {
   const clearCompleted = () => {
     props.clearCompleted();
   };
+
+  const deleteOne = id => {
+    props.deleteOne(id);
+  };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -82,6 +93,9 @@ function BottomAppBar(props) {
                     primary={todo.task}
                     secondary={date}
                   />
+                  <IconButton color="inherit" aria-label="Open drawer">
+                    <DeleteIcon onClick={() => deleteOne(todo.id)} />
+                  </IconButton>
                 </ListItem>
               </Fragment>
             );
@@ -112,5 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { toggleModal, toggleTodo, clearCompleted }
+  { toggleModal, toggleTodo, clearCompleted, deleteOne }
 )(withStyles(styles)(BottomAppBar));

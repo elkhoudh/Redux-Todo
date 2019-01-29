@@ -2,7 +2,8 @@ import {
   ADD_TODO,
   TOGGLE_COMPLETED,
   CLEAR_COMPLETED,
-  TOGGLE_MODAL
+  TOGGLE_MODAL,
+  DELETE_ONE
 } from "../types/index";
 
 export const addTodo = todo => {
@@ -32,5 +33,12 @@ export const clearCompleted = () => {
 export const toggleModal = () => {
   return {
     type: TOGGLE_MODAL
+  };
+};
+
+export const deleteOne = id => {
+  return {
+    type: DELETE_ONE,
+    payload: id
   };
 };
